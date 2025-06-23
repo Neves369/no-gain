@@ -8,15 +8,18 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { useState } from "react";
-import background from "./assets/background.webp";
+import background from "../../assets/background.webp";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassowrd] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const logar = (data: any) => {
+  const logar = () => {
     setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 5000);
   };
 
   return (
