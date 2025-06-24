@@ -1,13 +1,11 @@
-import Dashboard from "./screens/dashboard";
-import Treino from "./screens/treino";
-import Login from "./screens/login";
+import Routes from "./routes";
 
 export default function App() {
   return (
     <>
-      {/* <Dashboard /> */}
-      <Treino />
-      {/* <Login /> */}
+      {/* O componente Routes é responsável por definir as diferentes telas 
+            ou páginas da aplicação e como navegar entre elas. */}
+      <Routes />
     </>
   );
 }

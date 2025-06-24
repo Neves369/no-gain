@@ -9,14 +9,21 @@ import {
 } from "react-native";
 import { useState } from "react";
 import background from "../../assets/background.webp";
+import { LoginProps } from "../../routes/auth.routes";
+import { Controller, useForm } from "react-hook-form";
 
-const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassowrd] = useState("");
+const Login = ({ navigation }: LoginProps) => {
   const [loading, setLoading] = useState(false);
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const logar = () => {
+  const logar = (data: any) => {
+    console.log("teste: ", data);
     setLoading(true);
+
     setTimeout(() => {
       setLoading(false);
     }, 5000);
@@ -29,32 +36,56 @@ const Login = () => {
           <Text style={styles.label}>SIGN IN</Text>
         </View>
 
-        <TextInput
-          autoCapitalize="none"
-          keyboardType="email-address"
-          textContentType="emailAddress"
-          maxLength={60}
-          placeholderTextColor={"white"}
-          style={styles.input}
-          placeholder="Email"
-          value={email}
-          onChangeText={(value) => setEmail(value)}
+        <Controller
+          control={control}
+          name="email"
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, value } }) => (
+            <TextInput
+              autoCapitalize="none"
+              keyboardType="email-address"
+              textContentType="emailAddress"
+              maxLength={60}
+              placeholderTextColor={"white"}
+              style={styles.input}
+              placeholder="Email"
+              value={value}
+              onChangeText={onChange}
+            />
+          )}
         />
+        {errors.email && (
+          <Text style={{ color: "red" }}>Email é obrigatório</Text>
+        )}
 
-        <TextInput
-          autoCapitalize="none"
-          maxLength={12}
-          placeholderTextColor={"white"}
-          style={styles.input}
-          secureTextEntry={true}
-          placeholder="Password"
-          value={password}
-          onChangeText={(value) => setPassowrd(value)}
+        <Controller
+          control={control}
+          name="password"
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, value } }) => (
+            <TextInput
+              autoCapitalize="none"
+              maxLength={12}
+              placeholderTextColor={"white"}
+              style={styles.input}
+              secureTextEntry={true}
+              placeholder="Password"
+              value={value}
+              onChangeText={onChange}
+            />
+          )}
         />
+        {errors.password && (
+          <Text style={{ color: "red" }}>Senha é obrigatória</Text>
+        )}
 
         <TouchableOpacity
           disabled={loading}
-          onPress={logar}
+          onPress={handleSubmit(logar)}
           style={styles.button}
         >
           {loading ? (
