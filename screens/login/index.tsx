@@ -12,15 +12,21 @@ import background from "../../assets/background.webp";
 import { LoginProps } from "../../routes/auth.routes";
 import { Controller, useForm } from "react-hook-form";
 
+// tipos dos dados do formulário de login
+interface FormData {
+  email: string;
+  senha: string;
+}
+
 const Login = ({ navigation }: LoginProps) => {
   const [loading, setLoading] = useState(false);
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormData>();
 
-  const logar = (data: any) => {
+  const logar = (data: FormData) => {
     console.log("teste: ", data);
     setLoading(true);
 
@@ -62,7 +68,7 @@ const Login = ({ navigation }: LoginProps) => {
 
         <Controller
           control={control}
-          name="password"
+          name="senha"
           rules={{
             required: true,
           }}
@@ -73,13 +79,13 @@ const Login = ({ navigation }: LoginProps) => {
               placeholderTextColor={"white"}
               style={styles.input}
               secureTextEntry={true}
-              placeholder="Password"
+              placeholder="Senha"
               value={value}
               onChangeText={onChange}
             />
           )}
         />
-        {errors.password && (
+        {errors.senha && (
           <Text style={{ color: "red" }}>Senha é obrigatória</Text>
         )}
 
