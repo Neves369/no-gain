@@ -6,11 +6,13 @@ import {
   ImageBackground,
   TouchableOpacity,
   ActivityIndicator,
+  KeyboardAvoidingView,
 } from "react-native";
 import { useState } from "react";
 import background from "../../assets/background.webp";
 import { LoginProps } from "../../routes/auth.routes";
 import { Controller, useForm } from "react-hook-form";
+import { StatusBar } from "expo-status-bar";
 
 // tipos dos dados do formulário de login
 interface FormData {
@@ -36,7 +38,7 @@ const Login = ({ navigation }: LoginProps) => {
   };
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView behavior="padding" style={styles.container}>
       <ImageBackground style={styles.imageBackground} source={background}>
         <View style={styles.signInContainer}>
           <Text style={styles.label}>SIGN IN</Text>
@@ -101,7 +103,7 @@ const Login = ({ navigation }: LoginProps) => {
           )}
         </TouchableOpacity>
       </ImageBackground>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -121,6 +123,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     justifyContent: "flex-end",
   },
+
   signInContainer: {
     flexDirection: "row",
     alignItems: "center",

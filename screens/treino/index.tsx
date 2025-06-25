@@ -1,35 +1,41 @@
-import { View, StyleSheet, FlatList, Text } from "react-native";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, FlatList } from "react-native";
+import { TreinoProps } from "../../routes/app.routes";
+import TreinoItem from "../../components/menu/TreinoItem";
 
-const Treino = () => {
-  const data = [1, 2, 1, 4, 5, 6, 7, 8, 9, 10];
+const Treino = ({ route, navigation }: TreinoProps) => {
+  const [treinos, setTreinos] = useState<any>([]);
 
-  const renderItem = ({ item }: any) => {
-    return (
-      <View style={{ padding: 20, borderBottomWidth: 1, borderColor: "#ccc" }}>
-        <Text>{item}</Text>
-      </View>
-    );
-  };
+  useEffect(() => {
+    setTreinos(route.params);
+  }, []);
 
   return (
-    <View style={styles.container}>
-      <FlatList
-        style={{ marginTop: 100 }}
-        data={data}
-        renderItem={renderItem}
-        keyExtractor={(item, index) => index.toString()}
-      />
-    </View>
+    <FlatList
+      data={treinos}
+      contentContainerStyle={styles.container}
+      renderItem={({ item }) => {
+        return (
+          <TreinoItem
+            item={item}
+            onPress={() => {
+              // navigation.navigate("Exercicios", item.exercicios);
+            }}
+            resizeMode="contain"
+            reverseItem={false}
+          />
+        );
+      }}
+      keyExtractor={(item) => `${item.nome}`}
+    />
   );
 };
 
+export default Treino;
+
+// Definição dos estilos para os componentes
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "red",
+    paddingTop: 10,
   },
 });
-
-export default Treino;

@@ -1,6 +1,6 @@
 import React from "react";
+import imageMap from "../../utils/imageMap";
 import Entypo from "@expo/vector-icons/Entypo";
-import imagem from "../../assets/background.webp";
 import {
   View,
   Text,
@@ -32,7 +32,7 @@ const TreinoItem = ({
       <ImageBackground
         resizeMode={resizeMode}
         style={styles.itemSection}
-        source={imagem}
+        source={imageMap[item.nome] || null}
       />
 
       <View style={styles.itemSection}>
