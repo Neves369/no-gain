@@ -12,7 +12,8 @@ import { useState } from "react";
 import background from "../../assets/background.webp";
 import { LoginProps } from "../../routes/auth.routes";
 import { Controller, useForm } from "react-hook-form";
-import { StatusBar } from "expo-status-bar";
+import UsuarioService from "../../service/UsuarioService";
+import { useAuth } from "../../context/auth";
 
 // tipos dos dados do formulário de login
 interface FormData {
@@ -22,6 +23,7 @@ interface FormData {
 
 const Login = ({ navigation }: LoginProps) => {
   const [loading, setLoading] = useState(false);
+  const { signIn }: any = useAuth();
   const {
     control,
     handleSubmit,
@@ -29,12 +31,22 @@ const Login = ({ navigation }: LoginProps) => {
   } = useForm<FormData>();
 
   const logar = (data: FormData) => {
-    console.log("teste: ", data);
     setLoading(true);
 
-    setTimeout(() => {
-      setLoading(false);
-    }, 5000);
+    UsuarioService.login(data)
+      .then((resp: any) => {
+        if (resp.status == 200) {
+          signIn(resp.data[0]);
+        } else {
+          console.log("Usuário não encontrado");
+        }
+      })
+      .catch((error) => {
+        console.error("Erro ao realizar login:", error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (

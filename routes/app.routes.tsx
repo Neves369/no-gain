@@ -5,6 +5,9 @@ import {
 } from "@react-navigation/native-stack";
 import Treino from "../screens/treino";
 import Dashboard from "../screens/dashboard";
+import IExercicio from "../models/IExercicio";
+import TreinoCategoria from "../screens/treino/_sub";
+import Exercicio from "../screens/exercicio";
 
 // Define o tipo StackNavigation que representa a estrutura das rotas na navegação de stack.
 // Esse tipo descreve uma rota (Dashboard)
@@ -13,6 +16,8 @@ import Dashboard from "../screens/dashboard";
 type StackNavigation = {
   Dashboard: undefined;
   Treino: Array<any>;
+  Exercicios: Array<any>;
+  Exercicio: IExercicio;
 };
 
 // Exportando 3 tipos que serão usados para tipar as props nas telas e na navegação:
@@ -25,6 +30,14 @@ export type DashboardProps = NativeStackScreenProps<
   "Dashboard"
 >;
 export type TreinoProps = NativeStackScreenProps<StackNavigation, "Treino">;
+export type ExerciciosProps = NativeStackScreenProps<
+  StackNavigation,
+  "Exercicios"
+>;
+export type ExercicioProps = NativeStackScreenProps<
+  StackNavigation,
+  "Exercicio"
+>;
 
 // Criação do stack navigator do tipo StackNavigation,
 // garantindo que navegação siga a estrutura de rotas e parâmetros definidos no mesmo.
@@ -40,8 +53,37 @@ const AppRoutes = () => {
       }}
       initialRouteName="Dashboard"
     >
-      <Screen name="Dashboard" component={Dashboard} options={{}} />
-      <Screen name="Treino" component={Treino} />
+      <Screen
+        name="Dashboard"
+        component={Dashboard}
+        options={{
+          // headerShown: false,
+          animation: "slide_from_left",
+        }}
+      />
+      <Screen
+        name="Treino"
+        component={Treino}
+        options={{
+          animation: "slide_from_left",
+        }}
+      />
+
+      <Screen
+        name="Exercicios"
+        component={TreinoCategoria}
+        options={{
+          animation: "slide_from_right",
+        }}
+      />
+
+      <Screen
+        name="Exercicio"
+        component={Exercicio}
+        options={{
+          animation: "slide_from_right",
+        }}
+      />
     </Navigator>
   );
 };
