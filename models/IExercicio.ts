@@ -3,7 +3,6 @@ interface IExercicio {
     series: number,
     repeticoes: string,
     descricao: string,
-    video: string
 
 }
 

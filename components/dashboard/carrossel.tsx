@@ -1,17 +1,24 @@
 import { memo } from "react";
 import {
   View,
+  Image,
   StyleSheet,
   Dimensions,
-  Image,
   ImageBackground,
+  ImageSourcePropType,
   TouchableWithoutFeedback,
 } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
 
+interface ItemProps {
+  item: {
+    imagem: ImageSourcePropType;
+  };
+}
+
 const { width } = Dimensions.get("screen");
 
-const renderItem = ({ item }: any) => {
+const renderItem = ({ item }: ItemProps) => {
   return (
     <ImageBackground
       style={styles.background}

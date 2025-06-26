@@ -1,11 +1,11 @@
 import IUsuario from "../models/IUsuario";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
   useState,
+  ReactNode,
+  useEffect,
+  useContext,
+  createContext,
 } from "react";
 
 // Define uma interface para os dados que o contexto de autenticação irá fornecer.
@@ -13,19 +13,24 @@ import {
 //serão disponibilizados no contexto.
 export interface AuthContextData {
   signed: boolean;
-  user: IUsuario;
+  user: IUsuario | undefined;
   signIn(usuario: IUsuario): Promise<void>;
   signOut(): Promise<void>;
 }
 
 // Cria um contexto de autenticação.
-const AuthContext = createContext<AuthContextData | undefined>(undefined);
+const AuthContext = createContext<AuthContextData>({
+  signed: false,
+  user: undefined,
+  signIn: async () => {},
+  signOut: async () => {},
+});
 
 // Define o provedor de autenticação,
 // que irá envolver os componentes que precisam acessar o contexto.
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<any>(undefined); // Estado para armazenar os dados do usuário
-  const [signed, setSigned] = useState<any>(false); // Estado para indicar se o usuário está autenticado
+  const [user, setUser] = useState<IUsuario | undefined>(undefined); // Estado para armazenar os dados do usuário
+  const [signed, setSigned] = useState<boolean>(false); // Estado para indicar se o usuário está autenticado
 
   useEffect(() => {
     const loadStorageData = async () => {
@@ -49,6 +54,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return Promise.resolve();
   };
 
+  // Função para realizar o logout.
   const signOut = async () => {
     await AsyncStorage.removeItem("@User");
     setUser(undefined);

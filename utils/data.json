@@ -1,11 +1,11 @@
 {
-
   "categorias": [
     {
         "id": 1,
         "nome": "MUSCULAÇÃO",
         "exercicios": [
-            {
+            {   
+                "id": 1,
                 "nome": "PEITO",
                 "exercicios": [
                   {
@@ -34,8 +34,9 @@
                 ]
             },
             {
-            "nome": "COSTAS",
-            "exercicios": [
+              "id": 2,
+              "nome": "COSTAS",
+              "exercicios": [
                 {
                 "nome": "Puxada Alta",
                 "series": 4,
@@ -60,6 +61,7 @@
             ]
             },
             {
+              "id": 3,
             "nome": "PERNAS",
             "exercicios": [
                 {
@@ -83,6 +85,7 @@
             ]
             },
             {
+            "id": 4,
             "nome": "OMBROS",
             "exercicios": [
                 {
@@ -106,6 +109,7 @@
             ]
             },
             {
+            "id": 5,
             "nome": "BRAÇOS",
             "exercicios": [
                 {

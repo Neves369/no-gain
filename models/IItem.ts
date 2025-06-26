@@ -1,6 +1,9 @@
+import IExercicio from "./IExercicio";
+
 interface IItem{
+    id: number
     nome: string
-    exercicios: any[]
+    exercicios: Array<IExercicio>
 }
 
 export default IItem;

@@ -1,5 +1,11 @@
+import { ImageSourcePropType } from "react-native";
+
+interface IimageMap {
+  [key: string]: ImageSourcePropType | any;
+}
+
 //mapear as imagens para resolver o problema das importações
-const imageMap: any = {
+const imageMap: IimageMap = {
     "MUSCULAÇÃO": require("../assets/menu/musculação.webp"),
     "CROSSFIT": require("../assets/menu/crossfit.webp"),
     "FUNCIONAL": require("../assets/menu/funcional.webp"),

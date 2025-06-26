@@ -9,11 +9,12 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 import { useState } from "react";
+import { AxiosResponse } from "axios";
+import IUsuario from "../../models/IUsuario";
+import { useAuth } from "../../context/auth";
 import background from "../../assets/background.webp";
-import { LoginProps } from "../../routes/auth.routes";
 import { Controller, useForm } from "react-hook-form";
 import UsuarioService from "../../service/UsuarioService";
-import { useAuth } from "../../context/auth";
 
 // tipos dos dados do formulário de login
 interface FormData {
@@ -21,9 +22,9 @@ interface FormData {
   senha: string;
 }
 
-const Login = ({ navigation }: LoginProps) => {
+const Login = () => {
   const [loading, setLoading] = useState(false);
-  const { signIn }: any = useAuth();
+  const { signIn } = useAuth();
   const {
     control,
     handleSubmit,
@@ -34,7 +35,7 @@ const Login = ({ navigation }: LoginProps) => {
     setLoading(true);
 
     UsuarioService.login(data)
-      .then((resp: any) => {
+      .then((resp: AxiosResponse<IUsuario[]>) => {
         if (resp.status == 200) {
           signIn(resp.data[0]);
         } else {

@@ -8,15 +8,17 @@ import Dashboard from "../screens/dashboard";
 import IExercicio from "../models/IExercicio";
 import TreinoCategoria from "../screens/treino/_sub";
 import Exercicio from "../screens/exercicio";
+import IItem from "../models/IItem";
 
 // Define o tipo StackNavigation que representa a estrutura das rotas na navegação de stack.
 // Esse tipo descreve uma rota (Dashboard)
 // e os parâmetros que ela aceita:
 // Dashboard: Não aceita parâmetros (undefined).
+// Treino: Aceita um array de itens.
 type StackNavigation = {
   Dashboard: undefined;
-  Treino: Array<any>;
-  Exercicios: Array<any>;
+  Treino: Array<IItem>;
+  Exercicios: Array<IExercicio>;
   Exercicio: IExercicio;
 };
 
@@ -57,7 +59,6 @@ const AppRoutes = () => {
         name="Dashboard"
         component={Dashboard}
         options={{
-          // headerShown: false,
           animation: "slide_from_left",
         }}
       />

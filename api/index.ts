@@ -1,9 +1,14 @@
 import axios, {AxiosInstance} from 'axios';
 
+/**
+ * Cria uma instância do cliente Axios com a base URL definida
+ * para fazer requisições HTTP para a API
+ */
 const api: AxiosInstance = axios.create({
     baseURL: process.env.EXPO_PUBLIC_API_URL 
 });
 
+// Para interceptar erros de conexão
 api.interceptors.response.use(
     response => response,
     error => {
@@ -20,5 +25,7 @@ api.interceptors.response.use(
     }
 )
 
-
+/**
+ * Exporta a instância do cliente Axios como padrão
+ */
 export default api;

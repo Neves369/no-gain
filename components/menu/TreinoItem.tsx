@@ -12,7 +12,7 @@ import {
 // Definição das propriedades do componente TreinoItem
 interface TreinoItemProps {
   item: any;
-  onPress: any;
+  onPress: () => void;
   reverseItem: boolean;
   resizeMode: "cover" | "contain" | "stretch" | "repeat" | "center";
 }
